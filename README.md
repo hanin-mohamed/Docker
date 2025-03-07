@@ -23,24 +23,28 @@ A **Docker Image** is a lightweight, standalone package that contains everything
 docker pull imageName          # Pull an image from Docker Hub
 docker pull imageName:version  # Pull a specific version of an image
 docker images                  # List all downloaded images
-docker rmi image_id            # Remove an image
+docker rmi image_id            # Remove an image(only if no container is using it)
 ```
-
+mportant Note: If an image is being used by a container, you must remove the container first before deleting the image.
+```
+docker rm container_id  # Remove the container
+docker rmi image_id     # Now remove the image
 ---
 
+```
 ### 2️⃣ Docker Container 
 A **Container** is a running instance of a Docker Image. Containers are isolated environments that run applications.
 
 #### Commands:
 ```sh
 docker run imageName                    # Create and start a container
-docker run -d imageName                  # Run container in detached mode (background)
+docker run -d imageName                 # Run container in detached mode (background)
 docker run --name containerName imageName # Assign a name to the container
 docker ps                                # List running containers
 docker ps -a                             # List all containers (including stopped ones)
 docker stop container_id                 # Stop a running container
 docker start container_id                 # Start a stopped container
-docker rm container_id  
+docker rm container_id                   # Remove a container (must be stopped first)
 ```
 
 🔹 Example:
