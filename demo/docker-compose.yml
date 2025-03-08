@@ -1,29 +1,31 @@
 services:
   postgres:
-    container_name: postgres-new
-    image: postgres
+    container_name: postgres-new  # Sets a custom name for the PostgreSQL container
+    image: postgres  # Uses the official PostgreSQL image
     environment:
-       POSTGRES_USER: username
-       POSTGRES_PASSWORD: password
-       POSTGRES_DB: demo_db
+      POSTGRES_USER: username  # Database username
+      POSTGRES_PASSWORD: password  # Database password
+      POSTGRES_DB: demo_db  # Name of the schema to be created
     ports:
-      - "5433:5432"
+      - "5433:5432"  # Maps port 5432 in the container to 5433 on the host
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data  # Persists database data
     networks:
-      - spring-boot-network
+      - spring-boot-network  # Connects to the custom network
+
   spring-boot-app:
-    container_name: spring-demo
-    image: spring/dem
+    container_name: spring-demo  # Sets a custom name for the Spring Boot container
+    image: spring/dem  # Uses the custom Spring Boot image
     ports:
-      - "8088:8080"
+      - "8088:8080"  # Maps port 8080 in the container to 8088 on the host
     networks:
-        - spring-boot-network
+      - spring-boot-network  # Connects to the same network as PostgreSQL
     depends_on:
-        - postgres
+      - postgres  # Ensures PostgreSQL starts before this service
 
 volumes:
-  postgres:
+  postgres:  # Defines a volume to persist PostgreSQL data
+
 networks:
   spring-boot-network:
-   driver: bridge
+    driver: bridge  # Creates a bridge network for communication between containers
