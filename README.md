@@ -102,7 +102,7 @@ docker exec -it postgres-sql-anonymous psql -U postgres
 
 ## Docker Volumes - Solving Data Persistence Issues
 
-### Problem:
+### ❌ Problem:
 
 By default, when a container is deleted, all its data is lost. This is a major issue for databases or any application that needs persistent data.
 
@@ -133,8 +133,9 @@ docker run --name postgres-sql -e POSTGRES_PASSWORD=password -v /users/HANEEN/do
 
 ## Building a Custom Docker Image for a Project
 
-### Problem:
-Sometimes, you need to create a custom image instead of using existing ones.
+### ❌ Problem:
+You might need to add dependencies, set up configurations, or include your own code. Doing this manually every time is tiring and can lead to mistakes.
+So,sometimes, you create a custom image instead of using existing ones.
 ### Solution: Dockerfile
 
 A **Dockerfile** is a script that defines how to build an image.
@@ -156,9 +157,10 @@ docker run my-app
 
 ## Docker Networking - How Containers Communicate
 
-### Problem:
+### ❌ Problem:
 
-By default, containers are isolated from each other. If you have multiple containers that need to communicate (e.g., web app and database), you need a way to connect them.
+By default, containers are isolated from each other. If multiple containers,(like a web app and a database), need to communicate,
+they won’t be able to unless they are properly connected. 
 
 ### Solution: Docker Networks
 
@@ -194,9 +196,10 @@ Now, `my-webapp` can communicate with `my-db` using `my-db` as the hostname.
 
 ## Docker Compose - Managing Multi-Container Applications
 
-### Problem:
+### ❌ Problem:
 
-When working with multiple containers (ex: backend, database, frontend), manually starting and linking them is complex.
+When working with multiple containers like a backend, database, and frontend, starting and linking them manually is complex and time-consuming.
+You need to start each container separately and manually configure their connections, which can be tedious and error-prone.
 
 ### Solution: Docker Compose
 
@@ -210,8 +213,11 @@ For a complete example of a `docker-compose.yml` file, check out this [docker-co
 docker-compose up -d  # Start all services defined in docker-compose.yml
 docker-compose down   # Stop all services
 ```
-
 > **Note:** `depends_on` ensures the database starts before the backend.
 
----
+
+
+
+
+
 
